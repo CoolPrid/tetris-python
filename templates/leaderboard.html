@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Tetris Leaderboard{% endblock %}
+
+{% block content %}
+<div class="leaderboard-container">
+    <div class="leaderboard-header">
+        <h1>🏆 Leaderboard</h1>
+        <p>Top 10 High Scores</p>
+    </div>
+    
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+                <th>Lines</th>
+                <th>Level</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+            <tr>
+                <td>
+                    {% if loop.index <= 3 %}
+                        <span class="rank-medal rank-{{ loop.index }}">{{ loop.index }}</span>
+                    {% else %}
+                        {{ loop.index }}
+                    {% endif %}
+                </td>
+                <td>{{ score.player.username }}</td>
+                <td>{{ "{:,}".format(score.score) }}</td>
+                <td>{{ score.lines_cleared }}</td>
+                <td>{{ score.level }}</td>
+                <td>{{ score.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center; color: #666; font-style: italic;">
+                    No scores yet. Be the first to play!
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="/" class="back-link">← Back to Game</a>
+</div>
+{% endblock %}

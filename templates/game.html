@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Tetris Game{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div class="game-board">
+        <canvas id="tetris-canvas"></canvas>
+        
+        <!-- Game Over Overlay -->
+        <div id="game-over-overlay" class="game-over-overlay">
+            <div class="game-over-content">
+                <h2>Game Over!</h2>
+                <div class="final-score">
+                    Final Score: <span id="final-score">0</span>
+                </div>
+                <div class="username-input">
+                    <input type="text" id="username-input" placeholder="Enter your username" maxlength="20">
+                    <button class="btn btn-primary" onclick="saveScore()">Save Score</button>
+                </div>
+                <button class="btn btn-secondary" onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-info">
+        <div class="info-panel">
+            <h3>Score</h3>
+            <div class="score-display" id="score">0</div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>Lines</h3>
+            <div class="score-display" id="lines">0</div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>Level</h3>
+            <div class="score-display" id="level">1</div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>Next Piece</h3>
+            <canvas id="next-piece-canvas" class="next-piece-preview" width="100" height="100"></canvas>
+        </div>
+        
+        <div class="controls">
+            <h4>Controls</h4>
+            <div class="control-item">
+                <span>Move Left</span>
+                <span class="control-key">←</span>
+            </div>
+            <div class="control-item">
+                <span>Move Right</span>
+                <span class="control-key">→</span>
+            </div>
+            <div class="control-item">
+                <span>Soft Drop</span>
+                <span class="control-key">↓</span>
+            </div>
+            <div class="control-item">
+                <span>Rotate</span>
+                <span class="control-key">↑</span>
+            </div>
+            <div class="control-item">
+                <span>Hard Drop</span>
+                <span class="control-key">Space</span>
+            </div>
+            <div class="control-item">
+                <span>Pause</span>
+                <span class="control-key">P</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <a href="/leaderboard" class="btn btn-secondary" style="text-decoration: none; display: inline-block; text-align: center;">
+                View Leaderboard
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/tetris.js') }}"></script>
+{% endblock %}
